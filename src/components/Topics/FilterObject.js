@@ -20,7 +20,7 @@ export default class FilterObject extends Component {
         {
           brand: 'Honda',
           color: 'red',
-          manufacturingLocation: 'Japan',
+          location: 'Japan',
         }
       ],
 
@@ -35,26 +35,26 @@ export default class FilterObject extends Component {
 
   filterBikes(prop) {
     let bikes = this.state.bikes;
-    let filteredBikes = [];
+    let filterBikes = [];
 
     for (let i = 0; i < bikes.length; i++ ) {
       if ( bikes[i].hasOwnProperty(prop) ) {
-        filteredBikes.push(bikes[i]);
+        filterBikes.push(bikes[i]);
       }
     }
 
-    this.setState({ filteredBikes: filteredBikes });
+    this.setState({ filterBikes: filterBikes });
   }
 
   render() {
     return (
-      <div class="puzzleBox filteredObjectRB">
+      <div className="puzzleBox filterObjectPB">
         <h4> Filter Object </h4>
-        <span className="puzzleText"> Original: {JSON.stringify(this.state.bikes, null, 10) } </span>
+        <span className="puzzleText"> Original: { JSON.stringify(this.state.bikes, null, 10) } </span>
         <input className="inputLine" onChange={ (e) => this.handleChange(e.target.value) }/>
-        <button className="confirmationButton" onClick={ () => {this.filteredBikes(this.state.userInput) }}> Filter </button>
-        <span className="resultsBox"> Unfiltered: { JSON.stringify(this.state.unfilteredBikes) } </span>
-        <span className="resultsBox filteredObjectRB"> Filtered: { JSON.stringify(this.state.filteredBikes) }</span>
+        <button className="confirmationButton" onClick={ () => this.filterBikes(this.state.userInput) }> Filter </button>
+        <span className="resultsBox"> { JSON.stringify(this.state.unfilteredBikes) } </span>
+        <span className="resultsBox filterObjectRB"> Filter: { JSON.stringify(this.state.filterBikes) }</span>
       </div>
     )
   }
